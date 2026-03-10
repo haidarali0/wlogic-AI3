@@ -283,23 +283,35 @@ Join Our Team
 We are looking for talented engineers and developers to join Wlogic AI.
 </p>
 
-<form class="max-w-xl mx-auto space-y-6" enctype="multipart/form-data">
+<form id="careerForm"
+action="https://formsubmit.co/haidar.sliman.ali@gmail.com"
+method="POST"
+class="max-w-xl mx-auto space-y-6"
+enctype="multipart/form-data">
+
+<input type="hidden" name="_subject" value="Wlogic Job Request">
 
 <input
 type="text"
+name="name"
 placeholder="Full Name"
+required
 class="w-full p-4 rounded-lg bg-slate-800"
 />
 
 <input
 type="email"
+name="email"
 placeholder="Email"
+required
 class="w-full p-4 rounded-lg bg-slate-800"
 />
 
 <input
 type="text"
+name="position"
 placeholder="Position Applying For"
+required
 class="w-full p-4 rounded-lg bg-slate-800"
 />
 
@@ -309,18 +321,23 @@ Upload Your CV
 
 <input
 type="file"
+name="cv"
+required
 class="w-full p-4 rounded-lg bg-slate-800"
 />
 
 <button
 type="submit"
-class="gradient w-full py-4 rounded-lg text-lg font-semibold">
-
+class="gradient w-full py-4 rounded-lg font-semibold">
 Submit Application
-
 </button>
 
 </form>
+
+<div id="careerSuccess"
+class="hidden text-center text-green-400 mt-6 text-lg">
+✅ Application received. We will review your CV and contact you soon.
+</div>
 
 </section>
 
@@ -357,6 +374,27 @@ body: new FormData(form)
 form.style.display = "none";
 
 document.getElementById("successMessage")
+.classList.remove("hidden");
+
+});
+
+});
+
+const careerForm = document.getElementById("careerForm");
+
+careerForm.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+fetch(careerForm.action, {
+method: "POST",
+body: new FormData(careerForm)
+})
+.then(response => {
+
+careerForm.style.display = "none";
+
+document.getElementById("careerSuccess")
 .classList.remove("hidden");
 
 });
